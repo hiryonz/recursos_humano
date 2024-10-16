@@ -45,7 +45,7 @@
             <div class="col-md-8">
                 <div class="container-form shadow p-4">
                     <h3 class="text-center mb-4">Formulario de Empleado</h3>
-                    <form action="../classes/obtenerData.php" method="POST">
+                    <form id="formularioRH" action="../classes/obtenerData.php" method="POST">
                     <div class="mb-3">
                             <label for="cedula" class="form-label">Cédula:</label>
                             <input type="text" class="form-control" id="cedula" name="cedula"
@@ -259,6 +259,149 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
+
+
+
+
+        <script> 
+// Validación adicional para el formulario de cheques
+document.getElementById('formularioRH').addEventListener('submit', function(event) {
+    var cedula = document.getElementById('cedula').value;
+    var horas_trabajadas = document.getElementById('horas_trabajadas').value;
+    var salario_bruto = document.getElementById('salario_bruto').value;
+    var seguro_social = document.getElementById('seguro_social').value;
+    var seguro_educativo = document.getElementById('seguro_educativo');
+    var descuento1 = document.getElementById('descuento1');
+    var descuento2 = document.getElementById('descuento2');
+    var descuento3 = document.getElementById('descuento3');
+    var   salario_neto = document.getElementById('salario_neto');
+
+});
+   
+
+  document.getElementById('cedula').addEventListener('input', function(event) {
+    // Eliminar cualquier carácter no numérico, el símbolo "+" y el símbolo "-"
+    this.value = this.value.replace(/[^\d]/g, '');
+
+    // Evitar la entrada de números negativos
+    if (parseInt(this.value) < -1) {
+        this.value = '';
+    }
+});
+// Validación adicional para el formulario de cheques
+document.getElementById('horas_trabajadas').addEventListener('input', function(event) {
+    // Eliminar cualquier carácter no numérico excepto el punto decimal
+    
+     this.value = this.value.replace(/[^0-9.]/g, '');
+
+// Permitir solo un punto decimal y máximo dos dígitos después del punto
+var parts = this.value.split('.');
+if (parts.length > 2) {
+    this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+} else if (parts.length === 2 && parts[1].length > 2) {
+    this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+}
+});         
+document.getElementById('sal_hora').addEventListener('input', function(event) {
+    // Eliminar cualquier carácter no numérico excepto el punto decimal
+
+    this.value = this.value.replace(/[^0-9.]/g, '');
+
+    // Permitir solo un punto decimal y máximo dos dígitos después del punto
+    var parts = this.value.split('.');
+    if (parts.length > 2) {
+        this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+    } else if (parts.length === 2 && parts[1].length > 2) {
+        this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+    }
+});
+// Validación adicional para el campo "La suma de"
+document.getElementById('seguro_social').addEventListener('input', function(event) {
+    // Eliminar cualquier carácter no numérico excepto el punto decimal
+    this.value = this.value.replace(/[^0-9.]/g, '');
+
+    // Permitir solo un punto decimal y máximo dos dígitos después del punto
+    var parts = this.value.split('.');
+    if (parts.length > 2) {
+        this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+    } else if (parts.length === 2 && parts[1].length > 2) {
+        this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+    }
+  });
+
+  document.getElementById('seguro_educativo').addEventListener('input', function(event) {
+    // Eliminar cualquier carácter no numérico excepto el punto decimal
+    this.value = this.value.replace(/[^0-9.]/g, '');
+
+    // Permitir solo un punto decimal y máximo dos dígitos después del punto
+    var parts = this.value.split('.');
+    if (parts.length > 2) {
+        this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+    } else if (parts.length === 2 && parts[1].length > 2) {
+        this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+    }
+});
+
+
+
+  document.getElementById('descuento1').addEventListener('input', function(event) {
+    // Eliminar cualquier carácter no numérico excepto el punto decimal
+    this.value = this.value.replace(/[^0-9.]/g, '');
+
+    // Permitir solo un punto decimal y máximo dos dígitos después del punto
+    var parts = this.value.split('.');
+    if (parts.length > 2) {
+        this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+    } else if (parts.length === 2 && parts[1].length > 2) {
+        this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+    }
+  });
+
+
+  document.getElementById('descuento2').addEventListener('input', function(event) {
+     // Eliminar cualquier carácter no numérico excepto el punto decimal
+     this.value = this.value.replace(/[^0-9.]/g, '');
+
+// Permitir solo un punto decimal y máximo dos dígitos después del punto
+var parts = this.value.split('.');
+if (parts.length > 2) {
+    this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+} else if (parts.length === 2 && parts[1].length > 2) {
+    this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+}
+  });
+
+  document.getElementById('descuento3').addEventListener('input', function(event) {
+     // Eliminar cualquier carácter no numérico excepto el punto decimal
+     this.value = this.value.replace(/[^0-9.]/g, '');
+
+// Permitir solo un punto decimal y máximo dos dígitos después del punto
+var parts = this.value.split('.');
+if (parts.length > 2) {
+    this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+} else if (parts.length === 2 && parts[1].length > 2) {
+    this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+}
+  });
+
+  document.getElementById('salario_neto').addEventListener('input', function(event) {
+     // Eliminar cualquier carácter no numérico excepto el punto decimal
+     this.value = this.value.replace(/[^0-9.]/g, '');
+
+// Permitir solo un punto decimal y máximo dos dígitos después del punto
+var parts = this.value.split('.');
+if (parts.length > 2) {
+    this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+} else if (parts.length === 2 && parts[1].length > 2) {
+    this.value = parts[0] + '.' + parts[1].slice(0, 2); 
+}
+  });
+
+
+</script>
+     
+
+
 </body>
 
 </html>
