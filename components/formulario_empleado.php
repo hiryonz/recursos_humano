@@ -5,9 +5,8 @@
     <title>Formulario de Empleado</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        crossorigin="anonymous" />
-    <link rel="stylesheet" href="../assets/css/formularios.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/formulario4.css">
 </head>
 
 <body>
@@ -19,19 +18,13 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+                <ul class="navbar-nav ms-auto ">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
+                        <a class="nav-link" href="formulario_empleado.php">Recursos Humano</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Acerca de</a>
+                        <a class="nav-link" href="view_empleado.php">Ver Empleado</a>
                     </li>
                 </ul>
             </div>
@@ -41,53 +34,81 @@
     <!-- Formulario Perron -->
 
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row form">
+            <div class="col-md-12">
                 <div class="container-form shadow p-4">
-                    <h3 class="text-center mb-4">Formulario de Empleado</h3>
-                    <form action="../classes/obtenerData.php" method="POST">
+                <?php
+                    if (isset($_GET['status']) && isset($_GET['message'])) {
+                        $status = $_GET['status'];
+                        $message = htmlspecialchars($_GET['message']); // Prevent XSS
+
+                        if ($status === 'success') {
+                            echo "
+                            <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            <strong>$message</strong>
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                            </div>
+                            "; 
+                            
+                        } elseif ($status === 'failure') {
+                            echo "
+                            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                            <strong>$message</strong>
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                            </div>
+                            "; 
+                        }
+                    }
+                ?>
+                
+                    <h3 class="text-center mb-4" style="width:'100%'">Formulario de Empleado</h3>
+                    <form class="form-empleado" action="../classes/obtenerData.php" method="POST">
                     <div class="mb-3">
                             <label for="cedula" class="form-label">Cédula:</label>
                             <input type="text" class="form-control" id="cedula" name="cedula"
-                                placeholder="Ingresa tu cédula" >
+                                placeholder="x-xxx-xxxx" onkeypress="validacionCedula(event)" onblur="formatear(event)" required>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="nombre1" class="form-label">Primer Nombre:</label>
+                                <label for="nombre1" class="form-label" >Primer Nombre:</label>
                                 <input type="text" class="form-control" id="nombre1" name="nombre1"
-                                    placeholder="Ingresa tu primer nombre" >
+                                    placeholder="Ingresa tu primer nombre" onkeypress="validacionLetras(event)" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="nombre2" class="form-label">Segundo Nombre:</label>
                                 <input type="text" class="form-control" id="nombre2" name="nombre2"
-                                    placeholder="Ingresa tu segundo nombre">
+                                    placeholder="Ingresa tu segundo nombre" onkeypress="validacionLetras(event)">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="apellido1" class="form-label">Primer Apellido:</label>
                                 <input type="text" class="form-control" id="apellido1" name="apellido1"
-                                    placeholder="Ingresa tu primer apellido" >
+                                    placeholder="Ingresa tu primer apellido" onkeypress="validacionLetras(event)">
                             </div>
                             <div class="col-md-6">
                                 <label for="apellido2" class="form-label">Segundo Apellido:</label>
                                 <input type="text" class="form-control" id="apellido2" name="apellido2"
-                                    placeholder="Ingresa tu segundo apellido">
+                                    placeholder="Ingresa tu segundo apellido" onkeypress="validacionLetras(event)">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="genero" class="form-label">Género</label>
-                                <select class="form-control" id="genero" name="genero" onchange="toggleApellidoC()">
-                                    <option value="m">M</option>
-                                    <option value="f">F</option>
+                                <select class="form-control genero" id="genero" name="genero" onchange="toggleApellidoC(event)">
+                                    <option value="0" selected>M</option>
+                                    <option value="1">F</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="apellido2" class="form-label">Estado civil</label>
-                                <select class="form-control" id="genero" name="genero" onchange="toggleApellidoC()">
-                                    <option value="soltero">Solter@</option>
+                                <label for="estadoCivil" class="form-label">Estado civil</label>
+                                <select class="form-control estadoCivil" id="estadoCivil" name="estadoCivil" onchange="toggleApellidoC(event)">
+                                    <option value="soltero" selected>Solter@</option>
                                     <option value="casado">Casad@</option>
                                     <option value="divorciado">Divorciad@</option>
                                     <option value="viudo">Viud@</option>
@@ -95,53 +116,55 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3" id="usa_apellidoC_div" style="display: none;">
+                        <div class="row mb-3 usa_apellidoC_div" id="usa_apellidoC_div" style="display: none;">
                             <div class="col-md-6">
                                 <label for="usa_apellidoC" class="form-label">¿Usa Apellido de Casada?</label>
-                                <select class="form-control" id="usa_apellidoC" name="usa_apellidoC"
-                                    onchange="toggleApellidoCasada()">
-                                    <option value="no">No</option>
-                                    <option value="si">Sí</option>
+                                <select class="form-control usa_apellidoC" id="usa_apellidoC" name="usa_apellidoC"
+                                    onchange="toggleApellidoCasada(event)">
+                                    <option value="0">No</option>
+                                    <option value="1">Sí</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="row mb-3" id="campo_apellidoC" style="display: none;">
+                        <div class="row mb-3 campo_apellidoC" id="campo_apellidoC" style="display: none;">
                             <div class="col-md-6">
-                                <label for="apellidoC" class="form-label">Apellido Casada:</label>
-                                <input type="text" class="form-control" id="apellidoC" name="apellidoC"
-                                    placeholder="Ingresa tu apellido de casada">
+                                <label for="apellidoCasado" class="form-label">Apellido Casada:</label>
+                                <input type="text" class="form-control apellidoCasado" id="apellidoCasado" name="apellidoCasado"
+                                    placeholder="Ingresa tu apellido de casada" onkeypress="validacionLetras(event)">
                             </div>
                         </div>
 
 
                         <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="horario" class="form-label">Horario:</label>
-                                <input type="text" class="form-control" id="horario" name="horario"
-                                    placeholder="Ingresa tu horario" >
-                            </div>
+       
+                            
                             <div class="col-md-6">
                                 <label for="departamento" class="form-label">Departamento:</label>
-                                <input type="text" class="form-control" id="departamento" name="departamento"
-                                    placeholder="Ingresa tu departamento" >
+                                <select class="form-control" id="departamento" name="departamento">
+                                    <option value="0">Recursos Humano</option>
+                                    <option value="1" selected>Tecnologia</option>
+                                    <option value="2">Contabilidad</option>
+                                    <option value="3">Compras</option>
+                                    <option value="4">Bienes Patrimoniales</option>                           
+                                </select>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="provincia" class="form-label">Provincia:</label>
                                 <input type="text" class="form-control" id="provincia" name="provincia"
-                                    placeholder="Ingresa tu provincia" >
+                                    placeholder="Ingresa tu provincia" onkeypress="validacionLetras(event)">
                             </div>
                             <div class="col-md-4">
                                 <label for="distrito" class="form-label">Distrito:</label>
                                 <input type="text" class="form-control" id="distrito" name="distrito"
-                                    placeholder="Ingresa tu distrito" >
+                                    placeholder="Ingresa tu distrito" onkeypress="validacionLetras(event)">
                             </div>
                             <div class="col-md-4">
                                 <label for="corregimiento" class="form-label">Corregimiento:</label>
                                 <input type="text" class="form-control" id="corregimiento" name="corregimiento"
-                                    placeholder="Ingresa tu corregimiento" >
+                                    placeholder="Ingresa tu corregimiento" onkeypress="validacionLetras(event)">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -153,112 +176,586 @@
                             <div class="col-md-6">
                                 <label for="telefono" class="form-label">Teléfono:</label>
                                 <input type="text" class="form-control" id="telefono" name="telefono"
-                                    placeholder="Ingresa tu teléfono" >
+                                    placeholder="Ingresa tu teléfono" onkeypress="validacionNumeros(event)">
                             </div>
                         </div>
-                        <h3 class="text-center mb-4">Planilla</h3>
+                        <h3 class="text-center mb-4">Planilla (mensual)</h3>
                         <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="horas_trabajadas" class="form-label">Horas trabajadas:</label>
-                                <input type="text" class="form-control" id="horas_trabajadas" name="horas_trabajadas"
-                                    placeholder="Ingresa las horas trabajadas" >
+                            <div class="col-md-4">
+                                <label for="horas_trabajadas" class="form-label">Horas trabajada:</label>
+                                <input type="text" class="form-control horas_trabajadas" id="horas_trabajadas" name="horas_trabajadas"
+                                    placeholder="Ingresa las horas trabajadas" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="sal_hora" class="form-label">Salario por hora:</label>
-                                <input type="text" class="form-control" id="sal_hora" name="sal_hora"
-                                    placeholder="Ingresa tu salario por hora" >
+                                <input type="text" class="form-control sal_hora" id="sal_hora" name="sal_hora"
+                                    placeholder="Ingresa tu salario por hora" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="salario_bruto" class="form-label">Salario Bruto:</label>
+                                <input type="text" class="form-control salario_bruto" id="salario_bruto" name="salario_bruto"
+                                    placeholder="salario bruto" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <label for="salario_bruto" class="form-label">Salario Bruto</label>
-                                <input type="text" class="form-control" id="salario_bruto" name="salario_bruto"
-                                    placeholder="salario bruto" >
-                            </div>
-                            <div class="col-md-4">
-                                <label for="seguro_social" class="form-label">Seguro Social</label>
-                                <input type="text" class="form-control" id="seguro_social" name="seguro_social"
-                                    placeholder="Seguro Social" >
+                                <label for="seguro_social" class="form-label">Seguro Social:</label>
+                                <input type="text" class="form-control seguro_social" id="seguro_social" name="seguro_social"
+                                    placeholder="Seguro Social" readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="seguro_educativo" class="form-label">Seguro Educativo:</label>
-                                <input type="text" class="form-control" id="seguro_educativo" name="seguro_educativo"
-                                    placeholder="Seguro Educativo">
+                                <input type="text" class="form-control seguro_educativo" id="seguro_educativo" name="seguro_educativo"
+                                    placeholder="Seguro Educativo" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ir" class="form-label">Impuesto/Renta:</label>
+                                <input type="text" class="form-control ir" id="ir" name="ir" 
+                                placeholder="Ingresa Impuesto/Renta:" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <label for="ir" class="form-label">1/R:</label>
-                                <input type="text" class="form-control" id="ir" name="ir" placeholder="Ingresa 1/R" >
-                            </div>
-                            <div class="col-md-4">
                                 <label for="descuento1" class="form-label">Descuento1:</label>
-                                <input type="text" class="form-control" id="descuento1" name="descuento1"
-                                    placeholder="Ingresa el Descuento1" >
+                                <input type="text" class="form-control descuento1" id="descuento1" name="descuento1"
+                                    placeholder="Ingresa el Descuento1" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
                             </div>
                             <div class="col-md-4">
                                 <label for="descuento2" class="form-label">Descuento2:</label>
-                                <input type="text" class="form-control" id="descuento2" name="descuento2"
-                                    placeholder="Ingresa el Descuento2" >
+                                <input type="text" class="form-control descuento2" id="descuento2" name="descuento2"
+                                    placeholder="Ingresa el Descuento2" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="descuento3" class="form-label">Descuento3:</label>
+                                <input type="text" class="form-control descuento3" id="descuento3" name="descuento3"
+                                    placeholder="Ingresa el Descuento3" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="descuento3" class="form-label">Descuento3:</label>
-                                <input type="text" class="form-control" id="descuento3" name="descuento3"
-                                    placeholder="Ingresa el Descuento3">
-                            </div>
                             <div class="col-md-6">
                                 <label for="deducciones" class="form-label">Deducciones:</label>
-                                <input type="text" class="form-control" id="deducciones" name="deducciones" >
+                                <input type="text" class="form-control deducciones" id="deducciones" name="deducciones" 
+                                placeholder="Deducciones" readonly>
                             </div>
-                        </div>
-                        <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="salario_neto" class="form-label">Salario Neto:</label>
-                                <input type="text" class="form-control" id="salario_neto" name="salario_neto" >
+                                <input type="text" class="form-control salario_neto" id="salario_neto" name="salario_neto" 
+                                placeholder="Salario Neto" readonly>
                             </div>
                         </div>
-                        <div class="text-center">
+                        <input type="hidden" name="accion" value="insertar" id="accion">  <!-- Campo oculto -->
+
+                        <div class="text-center">                            
                             <button type="submit" class="btn btn-primary">Enviar</button>
-                            <button type="reset" class="btn btn-secondary">Cancelar</button>
+                            <button type="reset" class="btn btn-danger" onclick="levantarPagina()">limpiar campos</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <div class="row container-verEmpleado">
+        <table class="table" id="tablaDatos">
+            <thead id="thead">
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+
+        <div class="text-center btn-tabla" id="parent-btn-div">
+            <button  class="btn btn-primary actualizar" onclick="actualizar(event)">actualizar</button>
+            <button  class="btn btn-danger eliminar" onclick="eliminar(event)">eliminar</button>
+        </div>
+
     </div>
+    </div>
+
+                    <div class="container-actualizar-fondo">
+
+                    </div>
+                    <div class="container-actualizar">
+                            <div class="row form2">
+                                <div class="col-md-12">
+                                    <div class="container-form shadow p-4" id="cloned-form">
+                                        <div class="close-container-actualizar d-flex justify-content-end">  
+                                            <button class="close-container btn btn-light" onclick="cerrarDivActualizar()">x</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
     </div>
     <footer>
         <p>© 2024 Me Corro en los jefes.com Todos los derechos reservados.</p>
     </footer>
     <script>
-        function toggleApellidoC() {
-            var genero = document.getElementById("genero").value;
-            var usaApellidoCField = document.getElementById("usa_apellidoC_div");
 
-            if (genero === "f") {
+        function cerrarDivActualizar() {
+            const containerActualizar = document.querySelector(".container-actualizar")
+            const containerActualizarFondo = document.querySelector(".container-actualizar-fondo")
+
+            containerActualizar.style.display = 'none'
+            containerActualizarFondo.style.display = 'none'
+        }
+
+        
+
+
+
+
+
+
+        setTimeout(function() {
+            $(".alert").alert('close'); 
+        }, 7000);
+
+
+
+        async function actualizar(event) {
+            const containerActualizar = document.querySelector(".container-actualizar")
+            const containerActualizarFondo = document.querySelector(".container-actualizar-fondo")
+
+            containerActualizar.style.display = 'block'
+            containerActualizarFondo.style.display = 'flex'
+
+
+            
+            const clickedButton = event.target;
+            const parentDivId  = clickedButton.closest('.btn-tabla');
+            const cedula = parentDivId.id;
+
+                const datos = await obtenerData('verEspecifico', cedula);
+
+                const empleado = datos.empleado[0];
+                const planilla = datos.planilla[0] ; 
+                
+
+
+                const parentDiv = document.getElementById('cloned-form');
+                // Asigna los valores de los datos del empleado a los campos del formulario
+
+                parentDiv.querySelector('#cedula').value = empleado['Cedula'];
+                parentDiv.querySelector('#nombre1').value = empleado['Nombre'];
+                parentDiv.querySelector('#nombre2').value = empleado['Segundo Nombre'];
+                parentDiv.querySelector('#apellido1').value = empleado['Apellido']; 
+                parentDiv.querySelector('#apellido2').value = empleado['Segundo Apellido'];
+                parentDiv.querySelector('#genero').value = empleado['Genero']; 
+                parentDiv.querySelector('#estadoCivil').value = empleado['Estado civil']; // Asignar estado civil
+                parentDiv.querySelector('#correo').value = empleado['Correo']; // Asignar correo
+                parentDiv.querySelector('#telefono').value = empleado['Telefono']; // Asignar teléfono
+                parentDiv.querySelector('#provincia').value = empleado['Provincia']; // Asignar provincia
+                parentDiv.querySelector('#distrito').value = empleado['Distrito']; // Asignar distrito
+                parentDiv.querySelector('#corregimiento').value = empleado['Corregimiento']; // Asignar corregimiento
+                parentDiv.querySelector('#horas_trabajadas').value = planilla['Horas trabajadas']; // Asignar horas trabajadas
+                parentDiv.querySelector('#sal_hora').value = planilla['Salario x hora']; // Asignar salario por hora
+                parentDiv.querySelector('#salario_bruto').value = planilla['Salario Bruto']; // Asignar salario bruto
+                parentDiv.querySelector('#seguro_social').value = planilla['Seguro social']; // Asignar seguro social
+                parentDiv.querySelector('#seguro_educativo').value = planilla['Seguro Educativo']; // Asignar seguro educativo
+                parentDiv.querySelector('#ir').value = planilla['Impuesto/Renta']; // Asignar impuesto/renta
+                parentDiv.querySelector('#descuento1').value = planilla['Descuento 1']; // Asignar descuento 1
+                parentDiv.querySelector('#descuento2').value = planilla['Descuento 2']; // Asignar descuento 2
+                parentDiv.querySelector('#descuento3').value = planilla['Descuento 3'] || 0; // Asignar descuento 3
+                parentDiv.querySelector('#deducciones').value = planilla['Deduciones']; // Asignar deducciones
+                parentDiv.querySelector('#salario_neto').value = planilla['Salario Neto']; // Asignar salario neto
+
+                // Si deseas manejar el apellido de casada, puedes verificar si el valor es necesario.
+                if (datos['empleado']['Usa A.C'] == "1") {
+                    parentDiv.querySelector('#usa_apellidoC').value = "1"; // Asignar usa apellido de casada
+                    parentDiv.querySelector('#apellidoCasado').value = datos['empleado']['Apellido de Casada']; // Asignar apellido de casada
+                } else {
+                    parentDiv.querySelector('#usa_apellidoC').value = "0"; // Asignar no usa apellido de casada
+                    parentDiv.querySelector('#apellidoCasado').value = ""; // Limpiar apellido de casada
+                }
+
+
+            
+        }
+
+
+        function eliminar(event){
+            
+            const clickedButton = event.target;
+            const parentDiv  = clickedButton.closest('.btn-tabla');
+            const cedula = parentDiv.id;
+            
+            if(!confirm("Deseas borrar este registro, cedula: " + cedula )){
+                return;
+            }
+
+
+
+            const formData = new  FormData();
+            formData.append('accion', 'eliminar');
+            formData.append('cedula', cedula);
+
+            fetch('../classes/obtenerData.php', {
+                method: 'POST',
+                body: formData, 
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+                return response.json();
+            })
+            .then(data => {
+                    if (data.status === 'success') {
+                        alert(data.message);  // Show success message
+                        window.location.reload();
+                    } else {
+                        console.log('Error: ' + data.message);  // Show error message
+                    }
+            })
+            .catch(async (error) => {
+                console.error('Error:', error);  
+                const response = await fetch('../classes/obtenerData.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const text = await response.text(); // Obtén la respuesta como texto
+                console.error('Respuesta del servidor:', text);
+
+            });
+
+        }
+
+
+        /*
+        * obtener los botones de actaulizar y eliminar
+        */
+
+        const btnActualizar = document.querySelectorAll('.actualizar');
+        const accionInput = document.getElementById('accion');
+
+        btnActualizar.forEach(btn => {
+            btn.addEventListener('click', function() {
+                accionInput.value = 'actualizar';
+            });
+        });
+
+
+        
+
+
+        function toggleApellidoC(event) {
+            var form = event.target.closest('form');  // Find the form this event belongs to
+            var genero = event.target.value;
+            var usaApellidoCField = form.querySelector(".usa_apellidoC_div");
+
+            if (genero === "1") {
                 usaApellidoCField.style.display = "block";
             } else {
                 usaApellidoCField.style.display = "none";
-                document.getElementById("usa_apellidoC").value = "no";
-                toggleApellidoCasada();
+                form.querySelector(".usa_apellidoC").value = "no";
+                toggleApellidoCasada(null, form);  // Pass the form reference to toggleApellidoCasada
             }
         }
 
-        function toggleApellidoCasada() {
-            var usaApellidoC = document.getElementById("usa_apellidoC").value;
-            var campoApellidoC = document.getElementById("campo_apellidoC");
-            if (usaApellidoC === "si") {
+        function toggleApellidoCasada(event, form) {
+            if (!form) form = event.target.closest('form');  // Get the form if not already passed
+            var usaApellidoC = form.querySelector(".usa_apellidoC").value;
+            var campoApellidoC = form.querySelector(".campo_apellidoC");
+
+            if (usaApellidoC === "1") {
                 campoApellidoC.style.display = "block";
             } else {
                 campoApellidoC.style.display = "none";
-                document.getElementById("apellidoC").value = "";
+                form.querySelector(".apellidoCasado").value = "";
             }
         }
+
+        // Add event listeners for both forms
+        document.querySelectorAll('.genero').forEach(select => {
+            select.addEventListener('change', toggleApellidoC);
+        });
+
+        document.querySelectorAll('.usa_apellidoC').forEach(select => {
+            select.addEventListener('change', toggleApellidoCasada);
+        });
+
+
+
+        function levantarPagina() {
+            window.scrollTo({top: 0, behavior: 'smooth' }); // Desplazarse suavemente a la sección
+        }
+
+
+        function actualizarData() {
+            const form = document.querySelector(".form-empleado")
+            const clonedForm = form.cloneNode(true)
+            
+            const actualizarDiv = document.getElementById("cloned-form")
+
+
+            const accionInput = clonedForm.querySelector("#accion");
+            if (accionInput) {
+                accionInput.value = 'actualizar';
+            }
+            actualizarDiv.appendChild(clonedForm)
+            if (actualizarDiv) {
+                console.log(actualizarDiv)
+                initializePlanillaCalculators(actualizarDiv);
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            actualizarData();
+            const datos = await obtenerData('verdata', '');
+            crearTabla(datos['empleado']);
+
+        });
+
+
+        async function obtenerData(accion, cedula) {
+
+            const formData = new  FormData();
+            formData.append('accion', accion);
+            formData.append('cedula', cedula);
+
+            try {
+                const response = await fetch("../classes/obtenerDataBase.php", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error("Error en la respuesta del servidor");
+                }
+
+                // Espera a que la respuesta se convierta a JSON
+                const datos = await response.json();
+                return datos;
+
+            } catch (error) {
+                console.error('Error al obtener los datos:', error);
+            }
+        }
+
+
+
+        function crearTabla(datos, tablaId, theadId, tbodyId) {
+            const tabla = document.getElementById('tableDato');
+            const thead = document.getElementById('thead');
+            const tbody = document.getElementById('tbody');
+
+            thead.innerHTML = '';
+            tbody.innerHTML = '';
+
+            if (datos.length === 0) {
+                const noData = document.createElement('tr');
+                noData.innerHTML = '<td colspan="4">No hay datos disponibles</td>';
+                tbody.appendChild(noData);
+                return;
+            }
+
+            const columnas = ['#','Nombre', 'Cedula', 'Departamento', 'Genero', 'Acciones'];
+
+            const departamentos = {
+                "0": "Recursos Humano",
+                "1": "Tecnologia",
+                "2": "Contabilidad",
+                "3": "Compras",
+                "4": "Bienes Patrimoniales"
+            };
+
+            const filaCabecera = document.createElement('tr');
+                
+            columnas.forEach(columna => {
+                const th = document.createElement('th');
+                th.textContent = columna.charAt(0).toUpperCase() + columna.slice(1); // Capitalizar los nombres
+                filaCabecera.appendChild(th);
+            });
+
+            thead.appendChild(filaCabecera);
+
+            // Crear las filas de datos
+            let cont = 1;
+            datos.forEach(fila => {
+                const filaDatos = document.createElement('tr');
+                columnas.forEach(columna => {
+                    const td = document.createElement('td');
+                    td.textContent = fila[columna] ?? ""; 
+
+                    if (columna === 'Acciones'){ 
+                        let accion = document.querySelector('.btn-tabla')
+                        let clonedDiv = accion.cloneNode(true)
+                        clonedDiv.id = fila['Cedula']
+                        td.appendChild(clonedDiv);
+                    }
+
+                    if(columna === '#') {
+                        td.textContent = cont++;
+                    }
+
+                    if (columna === 'Departamento') {
+                        console.log(fila[columna])
+                        console.log(departamentos[fila[columna]])
+                        td.textContent = departamentos[fila[columna]] || fila[columna]; // Usar el valor como índice
+                    } else if (columna === 'Genero') {
+                        fila[columna] = (fila[columna] == "0") ? 'Masculino' : 'Femenino';
+                        td.textContent = fila[columna];
+                    }
+
+                    filaDatos.appendChild(td);
+                });
+                tbody.appendChild(filaDatos);
+            });
+        }
+
+
+
+        /*
+        *
+        *  seccion de los calculos de la planilla
+        * 
+        */
+
+
+        function initializePlanillaCalculators(form) {
+            const 
+                horaTrabajada = form.querySelector(".horas_trabajadas"),
+                salarioHora = form.querySelector(".sal_hora"),
+                salarioBruto = form.querySelector(".salario_bruto"),
+                seguroSocial = form.querySelector(".seguro_social"),
+                seguroEducativo = form.querySelector(".seguro_educativo"),
+                ir = form.querySelector(".ir"),
+                descuento1 = form.querySelector(".descuento1"),
+                descuento2 = form.querySelector(".descuento2"),
+                descuento3 = form.querySelector(".descuento3"),
+                deducciones = form.querySelector(".deducciones"),
+                salarioNeto = form.querySelector(".salario_neto");
+
+            horaTrabajada.addEventListener("input", calcularPlanilla);
+            salarioHora.addEventListener("input", calcularPlanilla);
+            descuento1.addEventListener("input", calcularPlanilla);
+            descuento2.addEventListener("input", calcularPlanilla);
+            descuento3.addEventListener("input", calcularPlanilla);
+
+
+            function calcularPlanilla() {
+                let horaTrabajadaValor = horaTrabajada.value;
+                let salarioHoraValor = salarioHora.value;
+                let descuento1Valor = descuento1.value;
+                let descuento2Valor = descuento2.value;
+                let descuento3Valor = descuento3.value;
+
+                if (!horaTrabajadaValor) { horaTrabajadaValor = 0; }
+                if (!salarioHoraValor) { salarioHoraValor = 0; }
+                if (!descuento1Valor) { descuento1Valor = 0; }
+                if (!descuento2Valor) { descuento2Valor = 0; }
+                if (!descuento3Valor) { descuento3Valor = 0; }
+
+                salarioBruto.value = (horaTrabajadaValor * salarioHoraValor).toFixed(2);
+                seguroSocial.value = (salarioBruto.value * 0.0975).toFixed(2);
+                seguroEducativo.value = (salarioBruto.value * 0.0125).toFixed(2);
+
+                // Calcular impuesto sobre la renta
+                let salarioAnual = ((salarioBruto.value || 0) * 13).toFixed(2);
+                let impuesto = 0;
+                if (salarioAnual > 11000 && salarioAnual < 50000) {
+                    impuesto = ((salarioAnual - 11000) * 0.15) / 13;
+                } else if (salarioAnual > 50000) {
+                    impuesto = ((50000 - 11000) * 0.15) / 13;
+                    impuesto += ((salarioAnual - 50000) * 0.25) / 13;
+                }
+
+                ir.value = impuesto.toFixed(2);
+
+                deducciones.value = parseFloat(
+                    parseFloat(seguroSocial.value) + 
+                    parseFloat(seguroEducativo.value) + 
+                    parseFloat(ir.value) + 
+                    parseFloat(descuento1Valor) + 
+                    parseFloat(descuento2Valor) +  
+                    parseFloat(descuento3Valor)
+                ).toFixed(2);
+
+                salarioNeto.value = ((salarioBruto.value || 0) - (deducciones.value || 0)).toFixed(2);
+            }   
+
+        }
+
+        // Inicializa los calculadores para el formulario original
+        const originalForm = document.querySelector(".form-empleado");
+        initializePlanillaCalculators(originalForm);
+
+
+
+        function validacionLetras(event) {
+             const char = String.fromCharCode(event.which);
+            // Verifica si el carácter es una letra (a-z o A-Z)
+            if (!/[a-zA-Z]/.test(char)) {
+                event.preventDefault(); // Evita la entrada del carácter
+            }
+        }
+
+        function validacionNumeros(event) {
+            const char = String.fromCharCode(event.which);
+
+            // Verifica si el carácter es un número (0-9)
+            if (!/[0-9]/.test(char)) {
+                event.preventDefault(); // Evita la entrada del carácter
+            }
+        }
+
+
+        function validacionNumerosPlanilla(event) {
+            const char = String.fromCharCode(event.which);
+
+            // Obtener el valor actual del input
+            const inputValue = event.target.value;
+
+            // Permitir solo números y el punto
+            if (!/[0-9.]/.test(char)) {
+                event.preventDefault(); // Evita la entrada del carácter
+                return;
+            }
+
+            // Permitir solo un punto
+            if (char === '.' && inputValue.includes('.')) {
+                event.preventDefault(); // Evita más de un punto
+                return;
+            }
+
+
+        }
+
+        function redondearInput(event) {
+            const value = parseFloat(event.target.value);
+            if (!isNaN(value)) {
+                event.target.value = value.toFixed(2); // Redondea a dos decimales
+            }
+        }
+
+        function validacionCedula(event) {
+            const char = String.fromCharCode(event.which);
+
+            // Verifica si el carácter es un número (0-9)
+            if (!/[0-9-]/.test(char)) {
+                event.preventDefault(); // Evita la entrada del carácter
+            }
+        }
+
+        function formatear(event) {
+            const regex = /^\d{1,3}-\d{3}-\d{3,4}$/; // Expresión regular para validar el formato 8-888-8888
+
+            if(event.target.value == '') {
+                return
+            }
+
+            if (!regex.test(event.target.value)) {
+                alert("Por favor, introduce el formato correcto: x-x-xxxx");
+                event.target.value = ''
+            }
+        }
+
+
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>
