@@ -481,7 +481,7 @@
         <p>© 2024 Me Corro en los jefes.com Todos los derechos reservados.</p>
     </footer>
     <script>
-
+        //tonto el que lo lea
         function cerrarDivActualizar() {
             const containerActualizar = document.querySelector(".container-actualizar")
             const containerActualizarFondo = document.querySelector(".container-actualizar-fondo")
