@@ -11,7 +11,10 @@
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $dbuser, $dbpass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "conecion";
+
+        return  $pdo;
+
+
     } catch (Exception $err) {
         echo $err->getMessage();
     }
