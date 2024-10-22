@@ -393,7 +393,7 @@ class ConsultasGeneral {
             'estadoCivil' => $empleado->getEstadoCivil(),
             'usaAC' => $empleado->getUsaAC(),
             'apellidoCasada' => $empleado->getApellidoCasada(),
-            'turnoHora' => $empleado->getTurnoHora(),
+            'turnoHora' => $empleado->getTurno(),
             'departamento' => $empleado->getDepartamento(),
             'distrito' => $empleado->getDistrito(),
             'correo' => $empleado->getCorreo(),
