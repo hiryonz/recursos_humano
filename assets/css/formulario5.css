@@ -76,6 +76,14 @@ strong {
 
 .table {
     overflow: auto;
+    height: fit-content !important;
+}
+
+.table td {
+
+    padding: 1px !important;
+    padding-top: .75rem !important; 
+    padding-bottom: .75rem !important;
 }
 
 .btn-tabla{
@@ -94,7 +102,6 @@ strong {
 #parent-btn-div {
     display: none !important;
 }
-
 
 
 .container-actualizar-fondo {

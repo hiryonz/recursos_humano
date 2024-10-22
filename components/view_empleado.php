@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla Dinámica con JSON</title>
-    <link  href="../assets/css/formulario4.css" rel="stylesheet" />
+    <link  href="../assets/css/formulario5.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
@@ -62,6 +62,13 @@
         document.addEventListener('DOMContentLoaded', getJSON('empleado'));
 
 
+
+        function lugares(){
+
+        }
+
+
+
         function getJSON(id) {
             fetch("../classes/obtenerDataBase.php")
                 .then(response => {
@@ -105,6 +112,14 @@
                 "4": "Bienes Patrimoniales"
             };
 
+
+            const civil = {
+                "0": "Soltero",
+                "1": "Casado",
+                "2": "Divorciado",
+                "3": "Viudo",
+            };
+
             // Crear la fila de cabeceras
             const filaCabecera = document.createElement('tr');
             const th = document.createElement('th');
@@ -130,8 +145,11 @@
                     const td = document.createElement('td');
                     td.textContent = fila[columna] || ''; // Si no existe la columna en esa fila, dejarla vacía
 
-                    if (columna === 'Departamento') {
-                        console.log(departamentos[fila[columna]])
+
+
+                    if (columna === 'Estado civil') {
+                        td.textContent = civil[fila[columna]] || fila[columna]; // Usar el valor como índice
+                    }else if (columna === 'Departamento') {
                         td.textContent = departamentos[fila[columna]] || fila[columna]; // Usar el valor como índice
                     } else if (columna === 'Genero') {
                         fila[columna] = (fila[columna] == "0") ? 'Masculino' : 'Femenino';
