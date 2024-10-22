@@ -70,30 +70,30 @@
                     <div class="mb-3">
                             <label for="cedula" class="form-label">Cédula:</label>
                             <input type="text" class="form-control" id="cedula" name="cedula"
-                                placeholder="x-xxx-xxxx" onkeypress="validacionCedula(event)" onblur="formatear(event)" required>
+                                placeholder="x-xxx-xxxx" onkeypress="validacionCedula(event)" onblur="formatear(event)" required autocomplete="off">
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="nombre1" class="form-label" >Primer Nombre:</label>
                                 <input type="text" class="form-control" id="nombre1" name="nombre1"
-                                    placeholder="Ingresa tu primer nombre" onkeypress="validacionLetras(event)" required>
+                                    placeholder="Ingresa tu primer nombre" onkeypress="validacionLetras(event)" autocomplete="off" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="nombre2" class="form-label">Segundo Nombre:</label>
                                 <input type="text" class="form-control" id="nombre2" name="nombre2"
-                                    placeholder="Ingresa tu segundo nombre" onkeypress="validacionLetras(event)">
+                                    placeholder="Ingresa tu segundo nombre" onkeypress="validacionLetras(event)" autocomplete="off">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="apellido1" class="form-label">Primer Apellido:</label>
                                 <input type="text" class="form-control" id="apellido1" name="apellido1"
-                                    placeholder="Ingresa tu primer apellido" onkeypress="validacionLetras(event)">
+                                    placeholder="Ingresa tu primer apellido" onkeypress="validacionLetras(event)" autocomplete="off">
                             </div>
                             <div class="col-md-6">
                                 <label for="apellido2" class="form-label">Segundo Apellido:</label>
                                 <input type="text" class="form-control" id="apellido2" name="apellido2"
-                                    placeholder="Ingresa tu segundo apellido" onkeypress="validacionLetras(event)">
+                                    placeholder="Ingresa tu segundo apellido" onkeypress="validacionLetras(event)" autocomplete="off"> 
                             </div>
                         </div>
 
@@ -131,7 +131,7 @@
                             <div class="col-md-6">
                                 <label for="apellidoCasado" class="form-label">Apellido Casada:</label>
                                 <input type="text" class="form-control apellidoCasado" id="apellidoCasado" name="apellidoCasado"
-                                    placeholder="Ingresa tu apellido de casada" onkeypress="validacionLetras(event)">
+                                    placeholder="Ingresa tu apellido de casada" onkeypress="validacionLetras(event)" autocomplete="off">
                             </div>
                         </div>
 
@@ -174,12 +174,12 @@
                             <div class="col-md-6">
                                 <label for="correo" class="form-label">Correo:</label>
                                 <input type="email" class="form-control" id="correo" name="correo"
-                                    placeholder="Ingresa tu correo" >
+                                    placeholder="Ingresa tu correo" autocomplete="off">
                             </div>
                             <div class="col-md-6">
                                 <label for="telefono" class="form-label">Teléfono:</label>
                                 <input type="text" class="form-control" id="telefono" name="telefono"
-                                    placeholder="Ingresa tu teléfono" onkeypress="validacionNumeros(event)">
+                                    placeholder="Ingresa tu teléfono" onkeypress="validacionNumeros(event)" autocomplete="off">
                             </div>
                         </div>
                         <h3 class="text-center mb-4">Planilla (mensual)</h3>
@@ -187,12 +187,12 @@
                             <div class="col-md-4">
                                 <label for="horas_trabajadas" class="form-label">Horas trabajada:</label>
                                 <input type="text" class="form-control horas_trabajadas" id="horas_trabajadas" name="horas_trabajadas"
-                                    placeholder="Ingresa las horas trabajadas" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required>
+                                    placeholder="Ingresa las horas trabajadas" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required autocomplete="off">
                             </div>
                             <div class="col-md-4">
                                 <label for="sal_hora" class="form-label">Salario por hora:</label>
                                 <input type="text" class="form-control sal_hora" id="sal_hora" name="sal_hora"
-                                    placeholder="Ingresa tu salario por hora" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required>
+                                    placeholder="Ingresa tu salario por hora" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required autocomplete="off">
                             </div>
                             <div class="col-md-4">
                                 <label for="salario_bruto" class="form-label">Salario Bruto:</label>
@@ -221,17 +221,17 @@
                             <div class="col-md-4">
                                 <label for="descuento1" class="form-label">Descuento1:</label>
                                 <input type="text" class="form-control descuento1" id="descuento1" name="descuento1"
-                                    placeholder="Ingresa el Descuento1" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
+                                    placeholder="Ingresa el Descuento1" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" autocomplete="off">
                             </div>
                             <div class="col-md-4">
                                 <label for="descuento2" class="form-label">Descuento2:</label>
                                 <input type="text" class="form-control descuento2" id="descuento2" name="descuento2"
-                                    placeholder="Ingresa el Descuento2" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
+                                    placeholder="Ingresa el Descuento2" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" autocomplete="off">
                             </div>
                             <div class="col-md-4">
                                 <label for="descuento3" class="form-label">Descuento3:</label>
                                 <input type="text" class="form-control descuento3" id="descuento3" name="descuento3"
-                                    placeholder="Ingresa el Descuento3" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
+                                    placeholder="Ingresa el Descuento3" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" autocomplete="off">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -287,37 +287,37 @@
                                              <div class="mb-3">
                                                         <label for="cedula" class="form-label">Cédula:</label>
                                                         <input type="text" class="form-control" id="cedula" name="cedula"
-                                                            placeholder="x-xxx-xxxx" onkeypress="validacionCedula(event)" onblur="formatear(event)" required>
+                                                            placeholder="x-xxx-xxxx" onkeypress="validacionCedula(event)" onblur="formatear(event)" required autocomplete="off">
                                                     </div>
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
                                                             <label for="nombre1" class="form-label" >Primer Nombre:</label>
                                                             <input type="text" class="form-control" id="nombre1" name="nombre1"
-                                                                placeholder="Ingresa tu primer nombre" onkeypress="validacionLetras(event)" required>
+                                                                placeholder="Ingresa tu primer nombre" onkeypress="validacionLetras(event)" required autocomplete="off">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="nombre2" class="form-label">Segundo Nombre:</label>
                                                             <input type="text" class="form-control" id="nombre2" name="nombre2"
-                                                                placeholder="Ingresa tu segundo nombre" onkeypress="validacionLetras(event)">
+                                                                placeholder="Ingresa tu segundo nombre" onkeypress="validacionLetras(event)" autocomplete="off">
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
                                                             <label for="apellido1" class="form-label">Primer Apellido:</label>
                                                             <input type="text" class="form-control" id="apellido1" name="apellido1"
-                                                                placeholder="Ingresa tu primer apellido" onkeypress="validacionLetras(event)">
+                                                                placeholder="Ingresa tu primer apellido" onkeypress="validacionLetras(event)" autocomplete="off">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="apellido2" class="form-label">Segundo Apellido:</label>
                                                             <input type="text" class="form-control" id="apellido2" name="apellido2"
-                                                                placeholder="Ingresa tu segundo apellido" onkeypress="validacionLetras(event)">
+                                                                placeholder="Ingresa tu segundo apellido" onkeypress="validacionLetras(event)" autocomplete="off">
                                                         </div>
                                                     </div>
 
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
                                                             <label for="genero" class="form-label">Género</label>
-                                                            <select class="form-control genero" id="genero" name="genero" onchange="toggleApellidoC(event)">
+                                                            <select class="form-control genero" id="genero" name="genero" onchange="toggleApellidoC(event)" >
                                                                 <option value="0" selected>M</option>
                                                                 <option value="1">F</option>
                                                             </select>
@@ -348,7 +348,7 @@
                                                         <div class="col-md-6">
                                                             <label for="apellidoCasado" class="form-label">Apellido Casada:</label>
                                                             <input type="text" class="form-control apellidoCasado" id="apellidoCasado" name="apellidoCasado"
-                                                                placeholder="Ingresa tu apellido de casada" onkeypress="validacionLetras(event)">
+                                                                placeholder="Ingresa tu apellido de casada" onkeypress="validacionLetras(event)" autocomplete="off">
                                                         </div>
                                                     </div>
 
@@ -391,12 +391,12 @@
                                                         <div class="col-md-6">
                                                             <label for="correo" class="form-label">Correo:</label>
                                                             <input type="email" class="form-control" id="correo" name="correo"
-                                                                placeholder="Ingresa tu correo" >
+                                                                placeholder="Ingresa tu correo" autocomplete="off">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="telefono" class="form-label">Teléfono:</label>
                                                             <input type="text" class="form-control" id="telefono" name="telefono"
-                                                                placeholder="Ingresa tu teléfono" onkeypress="validacionNumeros(event)">
+                                                                placeholder="Ingresa tu teléfono" onkeypress="validacionNumeros(event)" autocomplete="off">
                                                         </div>
                                                     </div>
                                                     <h3 class="text-center mb-4">Planilla (mensual)</h3>
@@ -404,12 +404,12 @@
                                                         <div class="col-md-4">
                                                             <label for="horas_trabajadas" class="form-label">Horas trabajada:</label>
                                                             <input type="text" class="form-control horas_trabajadas" id="horas_trabajadas" name="horas_trabajadas"
-                                                                placeholder="Ingresa las horas trabajadas" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required>
+                                                                placeholder="Ingresa las horas trabajadas" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required autocomplete="off">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="sal_hora" class="form-label">Salario por hora:</label>
                                                             <input type="text" class="form-control sal_hora" id="sal_hora" name="sal_hora"
-                                                                placeholder="Ingresa tu salario por hora" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required>
+                                                                placeholder="Ingresa tu salario por hora" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required autocomplete="off">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="salario_bruto" class="form-label">Salario Bruto:</label>
@@ -438,17 +438,17 @@
                                                         <div class="col-md-4">
                                                             <label for="descuento1" class="form-label">Descuento1:</label>
                                                             <input type="text" class="form-control descuento1" id="descuento1" name="descuento1"
-                                                                placeholder="Ingresa el Descuento1" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
+                                                                placeholder="Ingresa el Descuento1" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" autocomplete="off">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="descuento2" class="form-label">Descuento2:</label>
                                                             <input type="text" class="form-control descuento2" id="descuento2" name="descuento2"
-                                                                placeholder="Ingresa el Descuento2" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
+                                                                placeholder="Ingresa el Descuento2" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" autocomplete="off">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="descuento3" class="form-label">Descuento3:</label>
                                                             <input type="text" class="form-control descuento3" id="descuento3" name="descuento3"
-                                                                placeholder="Ingresa el Descuento3" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
+                                                                placeholder="Ingresa el Descuento3" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" autocomplete="off">
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
@@ -481,7 +481,7 @@
         <p>© 2024 Me Corro en los jefes.com Todos los derechos reservados.</p>
     </footer>
     <script>
-
+        //tonto el que lo lea
         function cerrarDivActualizar() {
             const containerActualizar = document.querySelector(".container-actualizar")
             const containerActualizarFondo = document.querySelector(".container-actualizar-fondo")
@@ -632,6 +632,7 @@
                 parentDiv.querySelector('#apellido2').value = empleado['Segundo Apellido'];
                 parentDiv.querySelector('#genero').value = empleado['Genero']; 
                 parentDiv.querySelector('#estadoCivil').value = empleado['Estado civil']; 
+                parentDiv.querySelector('#departamento').value = empleado['Departamento']; 
                 parentDiv.querySelector('#correo').value = empleado['Correo']; 
                 parentDiv.querySelector('#telefono').value = empleado['Telefono']; 
                 parentDiv.querySelector('#provincia').value = empleado['Provincia']; 
@@ -641,13 +642,14 @@
                 parentDiv.querySelector('#sal_hora').value = planilla['Salario x hora']; 
                 parentDiv.querySelector('#seguro_social').value = planilla['Seguro social']; 
                 parentDiv.querySelector('#seguro_educativo').value = planilla['Seguro Educativo']; 
+                parentDiv.querySelector('#salario_bruto').value = planilla['Salario Bruto']; 
                 parentDiv.querySelector('#ir').value = planilla['Impuesto/Renta']; 
                 parentDiv.querySelector('#descuento1').value = planilla['Descuento 1']; 
                 parentDiv.querySelector('#descuento2').value = planilla['Descuento 2']; 
                 parentDiv.querySelector('#descuento3').value = planilla['Descuento 3'] || 0; 
                 parentDiv.querySelector('#deducciones').value = planilla['Deduciones']; 
                 parentDiv.querySelector('#salario_neto').value = planilla['Salario Neto']; 
-                console.log(empleado)
+                console.log(planilla)
 
                 if (empleado['Usa A.C'] == "1") {
                     parentDiv.querySelector('#usa_apellidoC').value = "1"; 
