@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/formulario4.css">
+    <link rel="stylesheet" href="../assets/css/formulario5.css">
 </head>
 
 <body>
@@ -108,10 +108,10 @@
                             <div class="col-md-6">
                                 <label for="estadoCivil" class="form-label">Estado civil</label>
                                 <select class="form-control estadoCivil" id="estadoCivil" name="estadoCivil" onchange="toggleApellidoC(event)">
-                                    <option value="soltero" selected>Solter@</option>
-                                    <option value="casado">Casad@</option>
-                                    <option value="divorciado">Divorciad@</option>
-                                    <option value="viudo">Viud@</option>
+                                    <option value="0" selected>Solter@</option>
+                                    <option value="1">Casad@</option>
+                                    <option value="2">Divorciad@</option>
+                                    <option value="3">Viud@</option>
                                 </select>
                             </div>
                         </div>
@@ -153,18 +153,21 @@
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="provincia" class="form-label">Provincia:</label>
-                                <input type="text" class="form-control" id="provincia" name="provincia"
-                                    placeholder="Ingresa tu provincia" onkeypress="validacionLetras(event)">
+                                <select class="form-control form-select provincia" id="provincia" name="provincia" onchange="filtrarDistritos(event)">
+                                    <!-- Opciones de provincias se agregarán aquí -->
+                                </select>
                             </div>
                             <div class="col-md-4">
                                 <label for="distrito" class="form-label">Distrito:</label>
-                                <input type="text" class="form-control" id="distrito" name="distrito"
-                                    placeholder="Ingresa tu distrito" onkeypress="validacionLetras(event)">
+                                <select class="form-control form-select distrito" id="distrito" name="distrito" onchange="filtrarCorregimientos(event)">
+                                    <!-- Opciones de distritos se agregarán aquí -->
+                                </select>
                             </div>
                             <div class="col-md-4">
                                 <label for="corregimiento" class="form-label">Corregimiento:</label>
-                                <input type="text" class="form-control" id="corregimiento" name="corregimiento"
-                                    placeholder="Ingresa tu corregimiento" onkeypress="validacionLetras(event)">
+                                <select class="form-control form-select corregimiento" id="corregimiento" name="corregimiento">
+                                    <!-- Opciones de corregimientos se agregarán aquí -->
+                                </select>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -276,8 +279,197 @@
                             <div class="row form2">
                                 <div class="col-md-12">
                                     <div class="container-form shadow p-4" id="cloned-form">
-                                        <div class="close-container-actualizar d-flex justify-content-end">  
+                                        <div class=" d-flex justify-content-end">
                                             <button class="close-container btn btn-light" onclick="cerrarDivActualizar()">x</button>
+                                        </div>
+                                        <div class="close-container-actualizar">  
+                                            <form class="form-empleado" action="../classes/obtenerData.php" method="POST">
+                                             <div class="mb-3">
+                                                        <label for="cedula" class="form-label">Cédula:</label>
+                                                        <input type="text" class="form-control" id="cedula" name="cedula"
+                                                            placeholder="x-xxx-xxxx" onkeypress="validacionCedula(event)" onblur="formatear(event)" required>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <label for="nombre1" class="form-label" >Primer Nombre:</label>
+                                                            <input type="text" class="form-control" id="nombre1" name="nombre1"
+                                                                placeholder="Ingresa tu primer nombre" onkeypress="validacionLetras(event)" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="nombre2" class="form-label">Segundo Nombre:</label>
+                                                            <input type="text" class="form-control" id="nombre2" name="nombre2"
+                                                                placeholder="Ingresa tu segundo nombre" onkeypress="validacionLetras(event)">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <label for="apellido1" class="form-label">Primer Apellido:</label>
+                                                            <input type="text" class="form-control" id="apellido1" name="apellido1"
+                                                                placeholder="Ingresa tu primer apellido" onkeypress="validacionLetras(event)">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="apellido2" class="form-label">Segundo Apellido:</label>
+                                                            <input type="text" class="form-control" id="apellido2" name="apellido2"
+                                                                placeholder="Ingresa tu segundo apellido" onkeypress="validacionLetras(event)">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <label for="genero" class="form-label">Género</label>
+                                                            <select class="form-control genero" id="genero" name="genero" onchange="toggleApellidoC(event)">
+                                                                <option value="0" selected>M</option>
+                                                                <option value="1">F</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="estadoCivil" class="form-label">Estado civil</label>
+                                                            <select class="form-control estadoCivil" id="estadoCivil" name="estadoCivil" onchange="toggleApellidoC(event)">
+                                                                <option value="0" selected>Solter@</option>
+                                                                <option value="1">Casad@</option>
+                                                                <option value="2">Divorciad@</option>
+                                                                <option value="3">Viud@</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3 usa_apellidoC_div" id="usa_apellidoC_div" style="display: none;">
+                                                        <div class="col-md-6">
+                                                            <label for="usa_apellidoC" class="form-label">¿Usa Apellido de Casada?</label>
+                                                            <select class="form-control usa_apellidoC" id="usa_apellidoC" name="usa_apellidoC"
+                                                                onchange="toggleApellidoCasada(event)">
+                                                                <option value="0">No</option>
+                                                                <option value="1">Sí</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3 campo_apellidoC" id="campo_apellidoC" style="display: none;">
+                                                        <div class="col-md-6">
+                                                            <label for="apellidoCasado" class="form-label">Apellido Casada:</label>
+                                                            <input type="text" class="form-control apellidoCasado" id="apellidoCasado" name="apellidoCasado"
+                                                                placeholder="Ingresa tu apellido de casada" onkeypress="validacionLetras(event)">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row mb-3">
+                                
+                                                        
+                                                        <div class="col-md-6">
+                                                            <label for="departamento" class="form-label">Departamento:</label>
+                                                            <select class="form-control" id="departamento" name="departamento">
+                                                                <option value="0">Recursos Humano</option>
+                                                                <option value="1" selected>Tecnologia</option>
+                                                                <option value="2">Contabilidad</option>
+                                                                <option value="3">Compras</option>
+                                                                <option value="4">Bienes Patrimoniales</option>                           
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-4">
+                                                            <label for="provincia" class="form-label">Provincia:</label>
+                                                            <select class="form-control form-select provincia" id="provincia" name="provincia" onchange="filtrarDistritos(event, true)">
+                                                                <!-- Opciones de provincias se agregarán aquí -->
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="distrito" class="form-label">Distrito:</label>
+                                                            <select class="form-control form-select distrito" id="distrito" name="distrito" onchange="filtrarCorregimientos(event, true)">
+                                                                <!-- Opciones de distritos se agregarán aquí -->
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="corregimiento" class="form-label">Corregimiento:</label>
+                                                            <select class="form-control form-select corregimiento" id="corregimiento" name="corregimiento">
+                                                                <!-- Opciones de corregimientos se agregarán aquí -->
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <label for="correo" class="form-label">Correo:</label>
+                                                            <input type="email" class="form-control" id="correo" name="correo"
+                                                                placeholder="Ingresa tu correo" >
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="telefono" class="form-label">Teléfono:</label>
+                                                            <input type="text" class="form-control" id="telefono" name="telefono"
+                                                                placeholder="Ingresa tu teléfono" onkeypress="validacionNumeros(event)">
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="text-center mb-4">Planilla (mensual)</h3>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-4">
+                                                            <label for="horas_trabajadas" class="form-label">Horas trabajada:</label>
+                                                            <input type="text" class="form-control horas_trabajadas" id="horas_trabajadas" name="horas_trabajadas"
+                                                                placeholder="Ingresa las horas trabajadas" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="sal_hora" class="form-label">Salario por hora:</label>
+                                                            <input type="text" class="form-control sal_hora" id="sal_hora" name="sal_hora"
+                                                                placeholder="Ingresa tu salario por hora" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)" required>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="salario_bruto" class="form-label">Salario Bruto:</label>
+                                                            <input type="text" class="form-control salario_bruto" id="salario_bruto" name="salario_bruto"
+                                                                placeholder="salario bruto" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-4">
+                                                            <label for="seguro_social" class="form-label">Seguro Social:</label>
+                                                            <input type="text" class="form-control seguro_social" id="seguro_social" name="seguro_social"
+                                                                placeholder="Seguro Social" readonly>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="seguro_educativo" class="form-label">Seguro Educativo:</label>
+                                                            <input type="text" class="form-control seguro_educativo" id="seguro_educativo" name="seguro_educativo"
+                                                                placeholder="Seguro Educativo" readonly>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="ir" class="form-label">Impuesto/Renta:</label>
+                                                            <input type="text" class="form-control ir" id="ir" name="ir" 
+                                                            placeholder="Ingresa Impuesto/Renta:" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-4">
+                                                            <label for="descuento1" class="form-label">Descuento1:</label>
+                                                            <input type="text" class="form-control descuento1" id="descuento1" name="descuento1"
+                                                                placeholder="Ingresa el Descuento1" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="descuento2" class="form-label">Descuento2:</label>
+                                                            <input type="text" class="form-control descuento2" id="descuento2" name="descuento2"
+                                                                placeholder="Ingresa el Descuento2" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="descuento3" class="form-label">Descuento3:</label>
+                                                            <input type="text" class="form-control descuento3" id="descuento3" name="descuento3"
+                                                                placeholder="Ingresa el Descuento3" onblur="redondearInput(event)" onkeypress="validacionNumerosPlanilla(event)">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <label for="deducciones" class="form-label">Deducciones:</label>
+                                                            <input type="text" class="form-control deducciones" id="deducciones" name="deducciones" 
+                                                            placeholder="Deducciones" readonly>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="salario_neto" class="form-label">Salario Neto:</label>
+                                                            <input type="text" class="form-control salario_neto" id="salario_neto" name="salario_neto" 
+                                                            placeholder="Salario Neto" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="accion" value="actualizar" id="accion">  <!-- Campo oculto -->
+
+                                                    <div class="text-center">                            
+                                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                                        <button type="reset" class="btn btn-danger" onclick="levantarPagina()">limpiar campos</button>
+                                                    </div>
+                                                </form>
                                         </div>
                                     </div>
                                 </div>
@@ -299,9 +491,101 @@
         }
 
         
+        async function Provincia(id, form, tipo) {
+            try {
+                const response = await fetch('../classes/databaseHelper/consultas/getProvincias.php');
+                const provincias = await response.json();
+                
+                if (!form) form = document;
+                const provinciaSelect = form.querySelector('#provincia');
+
+                // Limpiar el select antes de agregar nuevas opciones
+                provinciaSelect.innerHTML = '';
+
+                provincias.forEach(provincia => {
+                    const option = document.createElement('option');
+                    option.value = provincia['codigo_provincia'];
+                    option.textContent = provincia['nombre_provincia'];
+                    provinciaSelect.appendChild(option);
+                });
+
+                if(!id) id = provincias[0]['codigo_provincia']
+
+                
+                await Distrito(id,  form, tipo);
+
+            } catch (error) {
+                console.error('Error al cargar provincias:', error);
+            }
+        }
+
+        async function Distrito(id, form, tipo) {
+            try {
+                const response = await fetch(`../classes/databaseHelper/consultas/getDistrito.php?id=${id}`);
+                const distritos = await response.json();
+                
+                if (!form) form = document;
+                const distritoSelect = form.querySelector('#distrito');
+
+                // Limpiar el select antes de agregar nuevas opciones
+                distritoSelect.innerHTML = '';
+
+                distritos.forEach(distrito => {
+                    const option = document.createElement('option');
+                    option.value = distrito['codigo_distrito'];
+                    option.textContent = distrito['nombre_distrito'];
+                    distritoSelect.appendChild(option);
+                });
+                
+                console.log(id)
+                console.log(distritos)
+                console.log(tipo)
+                if(tipo == 'provincia') id = distritos[0]['codigo_distrito']
+                else  id = tipo
+
+                
+                await Corregimiento(id, form);
+                
+            } catch (error) {
+                console.error('Error al cargar distritos:', error);
+            }
+        }
+
+        async function Corregimiento(id, form) {
+            try {
+                const response = await fetch(`../classes/databaseHelper/consultas/getCorregimiento.php?id=${id}`);
+                const corregimientos = await response.json();
+                if (!form) form = document;
+                const corregimientoSelect = form.querySelector('#corregimiento');
+
+                // Limpiar el select antes de agregar nuevas opciones
+                corregimientoSelect.innerHTML = '';
+
+                corregimientos.forEach(corregimiento => {
+                    const option = document.createElement('option');
+                    option.value = corregimiento['codigo_corregimiento'];
+                    option.textContent = corregimiento['nombre_corregimiento'];
+                    corregimientoSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error al cargar corregimientos:', error);
+            }
+        }
 
 
 
+
+        async function filtrarDistritos(event, form) {
+            const valor = event.target.value;
+            if(form) form = event.target.closest('form')
+            return await Distrito(valor, form, 'provincia')
+        }
+
+        async function filtrarCorregimientos(event, form) {
+            const valor = event.target.value;
+            if(form) form = event.target.closest('form')
+            return await Corregimiento(valor, form)
+        }
 
 
 
@@ -329,42 +613,48 @@
                 const empleado = datos.empleado[0];
                 const planilla = datos.planilla[0] ; 
                 
-
-
+                
                 const parentDiv = document.getElementById('cloned-form');
-                // Asigna los valores de los datos del empleado a los campos del formulario
+                
+                toggleApellidoC(null, parentDiv, empleado['Genero'])
+                toggleApellidoCasada(null, containerActualizar, empleado['Usa A.C'])
+                console.log(empleado['Provincia'])
+                const provinciaData = await Provincia(empleado['Provincia'], parentDiv, 'provincia')
+                console.log(empleado['Distrito'] + " actualizar")
+                const distritoData = await Distrito(empleado['Provincia'], parentDiv, empleado['Distrito'])
 
+
+            
                 parentDiv.querySelector('#cedula').value = empleado['Cedula'];
                 parentDiv.querySelector('#nombre1').value = empleado['Nombre'];
                 parentDiv.querySelector('#nombre2').value = empleado['Segundo Nombre'];
                 parentDiv.querySelector('#apellido1').value = empleado['Apellido']; 
                 parentDiv.querySelector('#apellido2').value = empleado['Segundo Apellido'];
                 parentDiv.querySelector('#genero').value = empleado['Genero']; 
-                parentDiv.querySelector('#estadoCivil').value = empleado['Estado civil']; // Asignar estado civil
-                parentDiv.querySelector('#correo').value = empleado['Correo']; // Asignar correo
-                parentDiv.querySelector('#telefono').value = empleado['Telefono']; // Asignar teléfono
-                parentDiv.querySelector('#provincia').value = empleado['Provincia']; // Asignar provincia
-                parentDiv.querySelector('#distrito').value = empleado['Distrito']; // Asignar distrito
-                parentDiv.querySelector('#corregimiento').value = empleado['Corregimiento']; // Asignar corregimiento
-                parentDiv.querySelector('#horas_trabajadas').value = planilla['Horas trabajadas']; // Asignar horas trabajadas
-                parentDiv.querySelector('#sal_hora').value = planilla['Salario x hora']; // Asignar salario por hora
-                parentDiv.querySelector('#salario_bruto').value = planilla['Salario Bruto']; // Asignar salario bruto
-                parentDiv.querySelector('#seguro_social').value = planilla['Seguro social']; // Asignar seguro social
-                parentDiv.querySelector('#seguro_educativo').value = planilla['Seguro Educativo']; // Asignar seguro educativo
-                parentDiv.querySelector('#ir').value = planilla['Impuesto/Renta']; // Asignar impuesto/renta
-                parentDiv.querySelector('#descuento1').value = planilla['Descuento 1']; // Asignar descuento 1
-                parentDiv.querySelector('#descuento2').value = planilla['Descuento 2']; // Asignar descuento 2
-                parentDiv.querySelector('#descuento3').value = planilla['Descuento 3'] || 0; // Asignar descuento 3
-                parentDiv.querySelector('#deducciones').value = planilla['Deduciones']; // Asignar deducciones
-                parentDiv.querySelector('#salario_neto').value = planilla['Salario Neto']; // Asignar salario neto
+                parentDiv.querySelector('#estadoCivil').value = empleado['Estado civil']; 
+                parentDiv.querySelector('#correo').value = empleado['Correo']; 
+                parentDiv.querySelector('#telefono').value = empleado['Telefono']; 
+                parentDiv.querySelector('#provincia').value = empleado['Provincia']; 
+                parentDiv.querySelector('#distrito').value = empleado['Distrito']; 
+                parentDiv.querySelector('#corregimiento').value = empleado['Corregimiento']; 
+                parentDiv.querySelector('#horas_trabajadas').value = planilla['Horas trabajadas']; 
+                parentDiv.querySelector('#sal_hora').value = planilla['Salario x hora']; 
+                parentDiv.querySelector('#seguro_social').value = planilla['Seguro social']; 
+                parentDiv.querySelector('#seguro_educativo').value = planilla['Seguro Educativo']; 
+                parentDiv.querySelector('#ir').value = planilla['Impuesto/Renta']; 
+                parentDiv.querySelector('#descuento1').value = planilla['Descuento 1']; 
+                parentDiv.querySelector('#descuento2').value = planilla['Descuento 2']; 
+                parentDiv.querySelector('#descuento3').value = planilla['Descuento 3'] || 0; 
+                parentDiv.querySelector('#deducciones').value = planilla['Deduciones']; 
+                parentDiv.querySelector('#salario_neto').value = planilla['Salario Neto']; 
+                console.log(empleado)
 
-                // Si deseas manejar el apellido de casada, puedes verificar si el valor es necesario.
-                if (datos['empleado']['Usa A.C'] == "1") {
-                    parentDiv.querySelector('#usa_apellidoC').value = "1"; // Asignar usa apellido de casada
-                    parentDiv.querySelector('#apellidoCasado').value = datos['empleado']['Apellido de Casada']; // Asignar apellido de casada
+                if (empleado['Usa A.C'] == "1") {
+                    parentDiv.querySelector('#usa_apellidoC').value = "1"; 
+                    parentDiv.querySelector('#apellidoCasado').value = empleado['Apellido de Casada']; 
                 } else {
-                    parentDiv.querySelector('#usa_apellidoC').value = "0"; // Asignar no usa apellido de casada
-                    parentDiv.querySelector('#apellidoCasado').value = ""; // Limpiar apellido de casada
+                    parentDiv.querySelector('#usa_apellidoC').value = "0"; 
+                    parentDiv.querySelector('#apellidoCasado').value = ""; 
                 }
 
 
@@ -438,25 +728,27 @@
         
 
 
-        function toggleApellidoC(event) {
-            var form = event.target.closest('form');  // Find the form this event belongs to
-            var genero = event.target.value;
+        function toggleApellidoC(event, form, genero) {
+            if(event){
+                var form = event.target.closest('form'); 
+                var genero = event.target.value;
+            }
             var usaApellidoCField = form.querySelector(".usa_apellidoC_div");
-
+            genero = genero.toString()
             if (genero === "1") {
                 usaApellidoCField.style.display = "block";
             } else {
                 usaApellidoCField.style.display = "none";
                 form.querySelector(".usa_apellidoC").value = "no";
-                toggleApellidoCasada(null, form);  // Pass the form reference to toggleApellidoCasada
+                toggleApellidoCasada(null, form);  
             }
         }
 
-        function toggleApellidoCasada(event, form) {
-            if (!form) form = event.target.closest('form');  // Get the form if not already passed
-            var usaApellidoC = form.querySelector(".usa_apellidoC").value;
+        function toggleApellidoCasada(event, form, usaApellidoC) {
+            if (!form) form = event.target.closest('form');  
+            if (!usaApellidoC) var usaApellidoC = form.querySelector(".usa_apellidoC").value;
             var campoApellidoC = form.querySelector(".campo_apellidoC");
-
+            usaApellidoC = usaApellidoC.toString()
             if (usaApellidoC === "1") {
                 campoApellidoC.style.display = "block";
             } else {
@@ -481,26 +773,18 @@
         }
 
 
+
         function actualizarData() {
-            const form = document.querySelector(".form-empleado")
-            const clonedForm = form.cloneNode(true)
-            
+
             const actualizarDiv = document.getElementById("cloned-form")
-
-
-            const accionInput = clonedForm.querySelector("#accion");
-            if (accionInput) {
-                accionInput.value = 'actualizar';
-            }
-            actualizarDiv.appendChild(clonedForm)
             if (actualizarDiv) {
-                console.log(actualizarDiv)
                 initializePlanillaCalculators(actualizarDiv);
             }
         }
 
 
         document.addEventListener('DOMContentLoaded', async function() {
+            Provincia(null, null, 'provincia');
             actualizarData();
             const datos = await obtenerData('verdata', '');
             crearTabla(datos['empleado']);
@@ -590,8 +874,6 @@
                     }
 
                     if (columna === 'Departamento') {
-                        console.log(fila[columna])
-                        console.log(departamentos[fila[columna]])
                         td.textContent = departamentos[fila[columna]] || fila[columna]; // Usar el valor como índice
                     } else if (columna === 'Genero') {
                         fila[columna] = (fila[columna] == "0") ? 'Masculino' : 'Femenino';
@@ -635,17 +917,13 @@
 
 
             function calcularPlanilla() {
-                let horaTrabajadaValor = horaTrabajada.value;
-                let salarioHoraValor = salarioHora.value;
-                let descuento1Valor = descuento1.value;
-                let descuento2Valor = descuento2.value;
-                let descuento3Valor = descuento3.value;
+                let horaTrabajadaValor = Math.round((parseFloat(horaTrabajada.value) || 0) * 100) / 100;
+                let salarioHoraValor = Math.round((parseFloat(salarioHora.value) || 0) * 100) / 100;
+                let descuento1Valor = Math.round((parseFloat(descuento1.value) || 0) * 100) / 100;
+                let descuento2Valor = Math.round((parseFloat(descuento2.value) || 0) * 100) / 100;
+                let descuento3Valor = Math.round((parseFloat(descuento3.value) || 0) * 100) / 100;
 
-                if (!horaTrabajadaValor) { horaTrabajadaValor = 0; }
-                if (!salarioHoraValor) { salarioHoraValor = 0; }
-                if (!descuento1Valor) { descuento1Valor = 0; }
-                if (!descuento2Valor) { descuento2Valor = 0; }
-                if (!descuento3Valor) { descuento3Valor = 0; }
+
 
                 salarioBruto.value = (horaTrabajadaValor * salarioHoraValor).toFixed(2);
                 seguroSocial.value = (salarioBruto.value * 0.0975).toFixed(2);
