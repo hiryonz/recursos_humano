@@ -105,11 +105,11 @@
             });
             
             const departamentos = {
-                "0": "Recursos Humano",
-                "1": "Tecnologia",
-                "2": "Contabilidad",
-                "3": "Compras",
-                "4": "Bienes Patrimoniales"
+                4: "Recursos Humano",
+                1: "Tecnologia",
+                2: "Contabilidad",
+                5: "Compras",
+                3: "Bienes Patrimoniales"
             };
 
 
@@ -149,7 +149,7 @@
 
                     if (columna === 'Estado civil') {
                         td.textContent = civil[fila[columna]] || fila[columna]; // Usar el valor como índice
-                    }else if (columna === 'Departamento') {
+                    }else if (columna === 'Departamento_ID') {
                         td.textContent = departamentos[fila[columna]] || fila[columna]; // Usar el valor como índice
                     } else if (columna === 'Genero') {
                         fila[columna] = (fila[columna] == "0") ? 'Masculino' : 'Femenino';

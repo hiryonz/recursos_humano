@@ -26,15 +26,15 @@ class ConsultasGeneral {
     
             // Primera consulta: Insertar en la tabla EMPLEADO
             $stmtEmpleado = $this->pdo->prepare("
-                INSERT INTO EMPLEADO (
-                    cedula, nombre, `segundo Nombre`, Apellido, `segundo Apellido`, genero,
-                    `estado civil`, `Usa A.C`, `apellido de casada`, `turno/hora`, departamento, distrito, 
-                    correo, telefono, `provincia`, `corregimiento`
+                INSERT INTO EMPLEADOS (
+                    Cedula, Nombre, `Segundo_Nombre`, Apellido, `segundo_Apellido`, Genero,
+                    `Usa_AC`, `Estado_Civil`,  `Apellido_Casada`, `Turno_Hora`, Departamento_ID,  
+                    correo, telefono, `codigo_provincia`, codigo_distrito,  `codigo_corregimiento`
                 ) 
                 VALUES (
                     :cedulaEmpleado, :nombre, :segundoNombre, :primerApellido, :segundoApellido, :genero,
-                    :estadoCivil, :usaAC, :apellidoCasada, :turnoHora, :departamento, :distrito, 
-                    :correo, :telefono, :provincia, :corregimiento
+                    :usaAC, :estadoCivil,  :apellidoCasada, :turnoHora, :departamento,  
+                    :correo, :telefono, :provincia,:distrito,  :corregimiento
                 )
             ");
 
@@ -42,12 +42,12 @@ class ConsultasGeneral {
             //insert para planilla
             $stmtPlanilla = $this->pdo->prepare("
                 INSERT INTO Planilla (
-                    cedula, `horas trabajadas`, `salario x hora`, `n planilla`, `n posicion`,
-                    `salario bruto`, `Seguro social`, `Seguro Educativo`, `Impuesto/Renta`,
-                    `Descuento 1`, `Descuento 2` , `Deduciones`, `Salario neto`
+                    Cedula_Empleado, `Horas_Trabajadas`, `Salario_Por_Hora`, `Numero_Posicion`,
+                    `Salario_Bruto`, `Seguro_Social`, `Seguro_Educativo`, `Impuesto_Renta`,
+                    `Descuento_1`, `Descuento_2` , `Deducciones`, `Salario_Neto`
                 )
                 VALUES (
-                    :cedulaPlanilla, :horasTrabajadas, :salarioHora, :nPlantilla, :nPosicion,
+                    :cedulaPlanilla, :horasTrabajadas, :salarioHora, :nPosicion,
                     :salarioBruto, :seguroSocial, :seguroEducativo, :impuestoRenta,
                     :descuento1, :descuento2, :deducciones, :salarioNeto
                 )
@@ -107,7 +107,7 @@ class ConsultasGeneral {
             $stmtPlanilla->bindParam(':cedulaPlanilla', $cedulaEmpleado); // Mismo cedula que en empleado
             $stmtPlanilla->bindParam(':horasTrabajadas', $horasTrabajadas);
             $stmtPlanilla->bindParam(':salarioHora', $salarioHora);
-            $stmtPlanilla->bindParam(':nPlantilla', $nPlantilla);
+            //$stmtPlanilla->bindParam(':nPlantilla', $nPlantilla);
             $stmtPlanilla->bindParam(':nPosicion', $nPosicion);
             $stmtPlanilla->bindParam(':salarioBruto', $salarioBruto);
             $stmtPlanilla->bindParam(':seguroSocial', $seguroSocial);
@@ -148,23 +148,23 @@ class ConsultasGeneral {
             $this->pdo->beginTransaction();
 
             $stmtEmpleado = $this->pdo->prepare("
-                UPDATE EMPLEADO 
+                UPDATE EMPLEADOS 
                 SET
-                    nombre = :nombre,
-                    `segundo Nombre` = :segundoNombre,
+                    Nombre = :nombre,
+                    `Segundo_Nombre` = :segundoNombre,
                     Apellido = :primerApellido,
-                    `segundo Apellido` = :segundoApellido,
-                    genero = :genero,
-                    `estado civil` = :estadoCivil,
-                    `Usa A.C` = :usaAC,
-                    `apellido de casada` = :apellidoCasada,
-                    `turno/hora` = :turnoHora,
-                    departamento = :departamento,
-                    distrito = :distrito,
+                    `Segundo_Apellido` = :segundoApellido,
+                    Genero = :genero,
+                    `Usa_AC` = :usaAC,
+                    `Estado_Civil` = :estadoCivil,
+                    `Apellido_Casada` = :apellidoCasada,
+                    `Turno_Hora` = :turnoHora,
+                    Departamento_ID = :departamento,
                     correo = :correo,
                     telefono = :telefono,
-                    provincia = :provincia,
-                    corregimiento = :corregimiento
+                    codigo_provincia = :provincia,
+                    codigo_distrito = :distrito,
+                    codigo_corregimiento = :corregimiento
                 WHERE
                     cedula = :cedulaEmpleado
             ");
@@ -172,19 +172,18 @@ class ConsultasGeneral {
            // Consulta para actualizar en la tabla Planilla
             $stmtPlanilla = $this->pdo->prepare("
                 UPDATE Planilla SET
-                    `horas trabajadas` = :horasTrabajadas, 
-                    `salario x hora` = :salarioHora, 
-                    `n planilla` = :nPlantilla, 
-                    `n posicion` = :nPosicion,
-                    `salario bruto` = :salarioBruto, 
-                    `Seguro social` = :seguroSocial, 
-                    `Seguro Educativo` = :seguroEducativo, 
-                    `Impuesto/Renta` = :impuestoRenta,
-                    `Descuento 1` = :descuento1, 
-                    `Descuento 2` = :descuento2, 
-                    `Deduciones` = :deducciones, 
-                    `Salario neto` = :salarioNeto
-                WHERE cedula = :cedulaPlanilla
+                    `Horas_Trabajadas` = :horasTrabajadas, 
+                    `Salario_Por_Hora` = :salarioHora, 
+                    `Numero_Posicion` = :nPosicion,
+                    `Salario_Bruto` = :salarioBruto, 
+                    `Seguro_Social` = :seguroSocial, 
+                    `Seguro_Educativo` = :seguroEducativo, 
+                    `Impuesto_Renta` = :impuestoRenta,
+                    `Descuento_1` = :descuento1, 
+                    `Descuento_2` = :descuento2, 
+                    `Deducciones` = :deducciones, 
+                    `Salario_Neto` = :salarioNeto
+                WHERE Cedula_Empleado = :cedulaPlanilla
             ");
 
                 $cedulaEmpleado = $empleado->getCedula();
@@ -278,7 +277,7 @@ class ConsultasGeneral {
                 // preparar  la consulta
                 $this->pdo->beginTransaction();
 
-                $stmtEmpleado = $this->pdo->prepare("SELECT * FROM EMPLEADO");
+                $stmtEmpleado = $this->pdo->prepare("SELECT * FROM EMPLEADOS");
 
                 $stmtPlanilla = $this->pdo->prepare("SELECT * FROM PLANILLA"); 
 
@@ -308,8 +307,8 @@ class ConsultasGeneral {
         try {
             $this->pdo->beginTransaction();
 
-            $stmtPlanilla = $this->pdo->prepare("SELECT * FROM Planilla where cedula = :cedula");
-            $stmtEmpleado = $this->pdo->prepare("SELECT * FROM EMPLEADO where cedula = :cedula");
+            $stmtPlanilla = $this->pdo->prepare("SELECT * FROM Planilla where Cedula = :cedula");
+            $stmtEmpleado = $this->pdo->prepare("SELECT * FROM EMPLEADOS where Cedula_Empleado = :cedula");
 
             $stmtPlanilla->bindParam(':cedula', $cedula);
             $stmtEmpleado->bindParam(':cedula', $cedula);
@@ -344,8 +343,8 @@ class ConsultasGeneral {
         try {
             $this->pdo->beginTransaction();
 
-            $stmtEmpleado = $this->pdo->prepare("DELETE FROM EMPLEADO WHERE Cedula = :cedula");
-            $stmtPlanilla = $this->pdo->prepare("DELETE FROM PLANILLA WHERE Cedula = :cedula");
+            $stmtEmpleado = $this->pdo->prepare("DELETE FROM EMPLEADOS WHERE Cedula = :cedula");
+            $stmtPlanilla = $this->pdo->prepare("DELETE FROM PLANILLA WHERE Cedula_Empleado = :cedula");
 
             $stmtEmpleado->bindParam(":cedula", $cedula);
             $stmtPlanilla->bindParam(":cedula", $cedula);

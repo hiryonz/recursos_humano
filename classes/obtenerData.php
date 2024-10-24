@@ -37,7 +37,7 @@
             $deducciones = $_POST['deducciones'] ?? "";
             $bonos = 0;
             $nPlanilla = 0;
-            $nPocision = 0;
+            $nPocision = $_POST['numero_pocision'] ?? '';
             $horasTrabajadas = $_POST['horas_trabajadas'] ?? "";
     
 
