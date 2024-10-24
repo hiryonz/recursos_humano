@@ -142,11 +142,11 @@
                             <div class="col-md-6">
                                 <label for="departamento" class="form-label">Departamento:</label>
                                 <select class="form-control" id="departamento" name="departamento">
-                                    <option value="0">Recursos Humano</option>
+                                    <option value="4">Recursos Humano</option>
                                     <option value="1" selected>Tecnologia</option>
                                     <option value="2">Contabilidad</option>
-                                    <option value="3">Compras</option>
-                                    <option value="4">Bienes Patrimoniales</option>                           
+                                    <option value="5">Compras</option>
+                                    <option value="3">Bienes Patrimoniales</option>                           
                                 </select>
                             </div>
                         </div>
@@ -183,6 +183,13 @@
                             </div>
                         </div>
                         <h3 class="text-center mb-4">Planilla (mensual)</h3>
+                        <div class="row">
+                            <div class="col">
+                                <label for="numero_pocision" class="form-label">Numero Pocision:</label>
+                                <input type="text" class="form-control numero_pocision" id="numero_pocision" name="numero_pocision"
+                                    placeholder="Ingresa pocision" required autocomplete="off">
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="horas_trabajadas" class="form-label">Horas trabajada:</label>
@@ -359,11 +366,11 @@
                                                         <div class="col-md-6">
                                                             <label for="departamento" class="form-label">Departamento:</label>
                                                             <select class="form-control" id="departamento" name="departamento">
-                                                                <option value="0">Recursos Humano</option>
+                                                                <option value="4">Recursos Humano</option>
                                                                 <option value="1" selected>Tecnologia</option>
                                                                 <option value="2">Contabilidad</option>
-                                                                <option value="3">Compras</option>
-                                                                <option value="4">Bienes Patrimoniales</option>                           
+                                                                <option value="5">Compras</option>
+                                                                <option value="3">Bienes Patrimoniales</option>                           
                                                             </select>
                                                         </div>
                                                     </div>
@@ -400,6 +407,13 @@
                                                         </div>
                                                     </div>
                                                     <h3 class="text-center mb-4">Planilla (mensual)</h3>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="numero_pocision" class="form-label">Numero Pocision:</label>
+                                                            <input type="text" class="form-control numero_pocision" id="numero_pocision" name="numero_pocision"
+                                                                placeholder="Ingresa pocision" required autocomplete="off">
+                                                        </div>
+                                                    </div>
                                                     <div class="row mb-3">
                                                         <div class="col-md-4">
                                                             <label for="horas_trabajadas" class="form-label">Horas trabajada:</label>
@@ -836,14 +850,14 @@
                 return;
             }
 
-            const columnas = ['#','Nombre', 'Cedula', 'Departamento', 'Genero', 'Acciones'];
+            const columnas = ['#','Nombre', 'Cedula', 'Departamento_ID', 'Genero', 'Acciones'];
 
             const departamentos = {
-                "0": "Recursos Humano",
-                "1": "Tecnologia",
-                "2": "Contabilidad",
-                "3": "Compras",
-                "4": "Bienes Patrimoniales"
+                4: "Recursos Humano",
+                1: "Tecnologia",
+                2: "Contabilidad",
+                5: "Compras",
+                3: "Bienes Patrimoniales"
             };
 
             const filaCabecera = document.createElement('tr');
@@ -874,8 +888,9 @@
                     if(columna === '#') {
                         td.textContent = cont++;
                     }
-
-                    if (columna === 'Departamento') {
+                    console.log(columna)
+                    if (columna === 'Departamento_ID') {
+                        console.log(fila[columna])
                         td.textContent = departamentos[fila[columna]] || fila[columna]; // Usar el valor como índice
                     } else if (columna === 'Genero') {
                         fila[columna] = (fila[columna] == "0") ? 'Masculino' : 'Femenino';
