@@ -2,7 +2,7 @@
     //conexion a la base de datos (temporales)
     $host = 'localhost';
     $db = 'proyecto_db';
-    $dbuser = 'userbd';
+    $dbuser = 'userdb';
     $dbpass = 'passworddb';
 
     //se debe cambiar esto
