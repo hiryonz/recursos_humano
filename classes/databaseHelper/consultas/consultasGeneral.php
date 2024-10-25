@@ -303,8 +303,8 @@ class ConsultasGeneral {
         try {
             $this->pdo->beginTransaction();
 
-            $stmtPlanilla = $this->pdo->prepare("SELECT * FROM Planilla where Cedula = :cedula");
-            $stmtEmpleado = $this->pdo->prepare("SELECT * FROM EMPLEADOS where Cedula_Empleado = :cedula");
+            $stmtPlanilla = $this->pdo->prepare("SELECT * FROM planilla where Cedula_Empleado = :cedula");
+            $stmtEmpleado = $this->pdo->prepare("SELECT * FROM empleados where Cedula = :cedula");
 
             $stmtPlanilla->bindParam(':cedula', $cedula);
             $stmtEmpleado->bindParam(':cedula', $cedula);
