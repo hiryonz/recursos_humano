@@ -1,9 +1,9 @@
 <?php
     //conexion a la base de datos (temporales)
     $host = 'localhost';
-    $db = 'recursos humano';
-    $dbuser = 'D72024';
-    $dbpass = '1234567';
+    $db = 'proyecto_db';
+    $dbuser = 'userbd';
+    $dbpass = 'passworddb';
 
     //se debe cambiar esto
 
