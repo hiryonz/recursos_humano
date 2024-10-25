@@ -28,12 +28,12 @@ class ConsultasGeneral {
             $stmtEmpleado = $this->pdo->prepare("
                 INSERT INTO EMPLEADOS (
                     Cedula, Nombre, `Segundo_Nombre`, Apellido, `segundo_Apellido`, Genero,
-                    `Usa_AC`, `Estado_Civil`,  `Apellido_Casada`, `Turno_Hora`, Departamento_ID,  
+                    `Usa_AC`, `Estado_Civil`,  `Apellido_Casada`, Departamento_ID,  
                     correo, telefono, `codigo_provincia`, codigo_distrito,  `codigo_corregimiento`
                 ) 
                 VALUES (
                     :cedulaEmpleado, :nombre, :segundoNombre, :primerApellido, :segundoApellido, :genero,
-                    :usaAC, :estadoCivil,  :apellidoCasada, :turnoHora, :departamento,  
+                    :usaAC, :estadoCivil,  :apellidoCasada, :departamento,  
                     :correo, :telefono, :provincia,:distrito,  :corregimiento
                 )
             ");
@@ -63,7 +63,6 @@ class ConsultasGeneral {
             $estadoCivil = $empleado->getEstadoCivil();
             $usaAC = $empleado->getUsaAC();
             $apellidoCasada = $empleado->getApellidoCasada();
-            $turnoHora = $empleado->getTurno() || '';
             $departamento = $empleado->getDepartamento();
             $distrito = $empleado->getDistrito();
             $correo = $empleado->getCorreo();
@@ -81,7 +80,6 @@ class ConsultasGeneral {
             $stmtEmpleado->bindParam(':estadoCivil', $estadoCivil);
             $stmtEmpleado->bindParam(':usaAC', $usaAC);
             $stmtEmpleado->bindParam(':apellidoCasada', $apellidoCasada);
-            $stmtEmpleado->bindParam(':turnoHora', $turnoHora);
             $stmtEmpleado->bindParam(':departamento', $departamento);
             $stmtEmpleado->bindParam(':distrito', $distrito);
             $stmtEmpleado->bindParam(':correo', $correo);
@@ -195,7 +193,6 @@ class ConsultasGeneral {
                 $estadoCivil = $empleado->getEstadoCivil();
                 $usaAC = $empleado->getUsaAC();
                 $apellidoCasada = $empleado->getApellidoCasada();
-                $turnoHora = $empleado->getTurno() || '';
                 $departamento = $empleado->getDepartamento();
                 $distrito = $empleado->getDistrito();
                 $correo = $empleado->getCorreo();
@@ -213,7 +210,6 @@ class ConsultasGeneral {
                 $stmtEmpleado->bindParam(':estadoCivil', $estadoCivil);
                 $stmtEmpleado->bindParam(':usaAC', $usaAC);
                 $stmtEmpleado->bindParam(':apellidoCasada', $apellidoCasada);
-                $stmtEmpleado->bindParam(':turnoHora', $turnoHora);
                 $stmtEmpleado->bindParam(':departamento', $departamento);
                 $stmtEmpleado->bindParam(':distrito', $distrito);
                 $stmtEmpleado->bindParam(':correo', $correo);
@@ -307,8 +303,8 @@ class ConsultasGeneral {
         try {
             $this->pdo->beginTransaction();
 
-            $stmtPlanilla = $this->pdo->prepare("SELECT * FROM Planilla where Cedula = :cedula");
-            $stmtEmpleado = $this->pdo->prepare("SELECT * FROM EMPLEADOS where Cedula_Empleado = :cedula");
+            $stmtPlanilla = $this->pdo->prepare("SELECT * FROM planilla where Cedula_Empleado = :cedula");
+            $stmtEmpleado = $this->pdo->prepare("SELECT * FROM empleados where Cedula = :cedula");
 
             $stmtPlanilla->bindParam(':cedula', $cedula);
             $stmtEmpleado->bindParam(':cedula', $cedula);
