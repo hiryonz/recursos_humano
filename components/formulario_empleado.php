@@ -551,9 +551,6 @@
                     distritoSelect.appendChild(option);
                 });
                 
-                console.log(id)
-                console.log(distritos)
-                console.log(tipo)
                 if(tipo == 'provincia') id = distritos[0]['codigo_distrito']
                 else  id = tipo
 
@@ -623,46 +620,48 @@
             const cedula = parentDivId.id;
 
                 const datos = await obtenerData('verEspecifico', cedula);
-
+                console.log(datos)
                 const empleado = datos.empleado[0];
                 const planilla = datos.planilla[0] ; 
                 
-                
+                console.log(planilla    )
                 const parentDiv = document.getElementById('cloned-form');
                 
                 toggleApellidoC(null, parentDiv, empleado['Genero'])
                 toggleApellidoCasada(null, containerActualizar, empleado['Usa A.C'])
-                console.log(empleado['Provincia'])
-                const provinciaData = await Provincia(empleado['Provincia'], parentDiv, 'provincia')
-                console.log(empleado['Distrito'] + " actualizar")
-                const distritoData = await Distrito(empleado['Provincia'], parentDiv, empleado['Distrito'])
+                const provinciaData = await Provincia(empleado['codigo_provincia'], parentDiv, 'provincia')
+                console.log(empleado['codigo_provincia'])
+                const distritoData = await Distrito(empleado['codigo_provincia'], parentDiv, empleado['codigo_distrito'])
 
 
             
                 parentDiv.querySelector('#cedula').value = empleado['Cedula'];
                 parentDiv.querySelector('#nombre1').value = empleado['Nombre'];
-                parentDiv.querySelector('#nombre2').value = empleado['Segundo Nombre'];
+                parentDiv.querySelector('#nombre2').value = empleado['Segundo_Nombre'];
                 parentDiv.querySelector('#apellido1').value = empleado['Apellido']; 
-                parentDiv.querySelector('#apellido2').value = empleado['Segundo Apellido'];
+                parentDiv.querySelector('#apellido2').value = empleado['Segundo_Apellido'];
                 parentDiv.querySelector('#genero').value = empleado['Genero']; 
-                parentDiv.querySelector('#estadoCivil').value = empleado['Estado civil']; 
-                parentDiv.querySelector('#departamento').value = empleado['Departamento']; 
+                parentDiv.querySelector('#estadoCivil').value = empleado['Estado_Civil']; 
+                parentDiv.querySelector('#departamento').value = empleado['Departamento_ID']; 
                 parentDiv.querySelector('#correo').value = empleado['Correo']; 
                 parentDiv.querySelector('#telefono').value = empleado['Telefono']; 
-                parentDiv.querySelector('#provincia').value = empleado['Provincia']; 
-                parentDiv.querySelector('#distrito').value = empleado['Distrito']; 
-                parentDiv.querySelector('#corregimiento').value = empleado['Corregimiento']; 
-                parentDiv.querySelector('#horas_trabajadas').value = planilla['Horas trabajadas']; 
-                parentDiv.querySelector('#sal_hora').value = planilla['Salario x hora']; 
-                parentDiv.querySelector('#seguro_social').value = planilla['Seguro social']; 
-                parentDiv.querySelector('#seguro_educativo').value = planilla['Seguro Educativo']; 
-                parentDiv.querySelector('#salario_bruto').value = planilla['Salario Bruto']; 
-                parentDiv.querySelector('#ir').value = planilla['Impuesto/Renta']; 
-                parentDiv.querySelector('#descuento1').value = planilla['Descuento 1']; 
-                parentDiv.querySelector('#descuento2').value = planilla['Descuento 2']; 
-                parentDiv.querySelector('#descuento3').value = planilla['Descuento 3'] || 0; 
-                parentDiv.querySelector('#deducciones').value = planilla['Deduciones']; 
-                parentDiv.querySelector('#salario_neto').value = planilla['Salario Neto']; 
+                parentDiv.querySelector('#provincia').value = empleado['codigo_provincia']; 
+                parentDiv.querySelector('#distrito').value = empleado['codigo_distrito']; 
+                parentDiv.querySelector('#corregimiento').value = empleado['codigo_corregimiento']; 
+                parentDiv.querySelector('#horas_trabajadas').value = planilla['Horas_Trabajadas']; 
+                parentDiv.querySelector('#sal_hora').value = planilla['Salario_Por_Hora']; 
+                parentDiv.querySelector('#seguro_social').value = planilla['Seguro_Social']; 
+                parentDiv.querySelector('#seguro_educativo').value = planilla['Seguro_Educativo']; 
+                parentDiv.querySelector('#salario_bruto').value = planilla['Salario_Bruto']; 
+                parentDiv.querySelector('#ir').value = planilla['Impuesto_Renta']; 
+                parentDiv.querySelector('#descuento1').value = planilla['Descuento_1']; 
+                parentDiv.querySelector('#descuento2').value = planilla['Descuento_2']; 
+                parentDiv.querySelector('#descuento3').value = planilla['Descuento_3'] || 0; 
+                parentDiv.querySelector('#deducciones').value = planilla['Deducciones']; 
+                parentDiv.querySelector('#salario_neto').value = planilla['Salario_Neto']; 
+                parentDiv.querySelector('#numero_pocision').value = planilla['Numero_Posicion']; 
+
+                
                 console.log(planilla)
 
                 if (empleado['Usa A.C'] == "1") {
@@ -888,9 +887,7 @@
                     if(columna === '#') {
                         td.textContent = cont++;
                     }
-                    console.log(columna)
                     if (columna === 'Departamento_ID') {
-                        console.log(fila[columna])
                         td.textContent = departamentos[fila[columna]] || fila[columna]; // Usar el valor como índice
                     } else if (columna === 'Genero') {
                         fila[columna] = (fila[columna] == "0") ? 'Masculino' : 'Femenino';

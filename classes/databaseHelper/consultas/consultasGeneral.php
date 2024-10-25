@@ -156,7 +156,6 @@ class ConsultasGeneral {
                     `Usa_AC` = :usaAC,
                     `Estado_Civil` = :estadoCivil,
                     `Apellido_Casada` = :apellidoCasada,
-                    `Turno_Hora` = :turnoHora,
                     Departamento_ID = :departamento,
                     correo = :correo,
                     telefono = :telefono,
@@ -234,7 +233,6 @@ class ConsultasGeneral {
                 $stmtPlanilla->bindParam(':cedulaPlanilla', $cedulaEmpleado); // Mismo cedula que en empleado
                 $stmtPlanilla->bindParam(':horasTrabajadas', $horasTrabajadas);
                 $stmtPlanilla->bindParam(':salarioHora', $salarioHora);
-                $stmtPlanilla->bindParam(':nPlantilla', $nPlantilla);
                 $stmtPlanilla->bindParam(':nPosicion', $nPosicion);
                 $stmtPlanilla->bindParam(':salarioBruto', $salarioBruto);
                 $stmtPlanilla->bindParam(':seguroSocial', $seguroSocial);
