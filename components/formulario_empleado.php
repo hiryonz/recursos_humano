@@ -37,10 +37,10 @@
         <div class="row form">
             <div class="col-md-12">
                 <div class="container-form shadow p-4">
-<<<<<<< HEAD
-                    <h3 class="text-center mb-4">Formulario de Empleado</h3>
+
+                    
                     <form id="formularioRH" action="../classes/obtenerData.php" method="POST">
-=======
+
                 <?php
                     if (isset($_GET['status']) && isset($_GET['message'])) {
                         $status = $_GET['status'];
@@ -71,7 +71,7 @@
                 
                     <h3 class="text-center mb-4" style="width:'100%'">Formulario de Empleado</h3>
                     <form class="form-empleado" action="../classes/obtenerData.php" method="POST">
->>>>>>> 4b139dc9f0a94ba31bd6dfc7c68afde2a843f807
+
                     <div class="mb-3">
                             <label for="cedula" class="form-label">Cédula:</label>
                             <input type="text" class="form-control" id="cedula" name="cedula"
